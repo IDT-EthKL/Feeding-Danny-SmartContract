@@ -1,0 +1,183 @@
+{
+	"compiler": {
+		"version": "0.8.24+commit.e11b9ed9"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "burnFish",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "player",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "species",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "size",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "rarity",
+						"type": "uint256"
+					}
+				],
+				"name": "catchFish",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getTokenId",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "ownerOf",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/CrossChainFishGame.sol": "IFishGameNFT"
+		},
+		"evmVersion": "shanghai",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"@hyperlane-xyz/core/contracts/interfaces/IInterchainGasPaymaster.sol": {
+			"keccak256": "0xb76bb3b667ad90500a6f53939fccdab81ddb9eb056bc15991b747f1e4fa79570",
+			"license": "MIT OR Apache-2.0",
+			"urls": [
+				"bzz-raw://1f45a8e209c833e96df1a13d784eff5e9d08884da5594f5ddbc465ef2abc26fd",
+				"dweb:/ipfs/QmY3pziVrq1X5LV3H7xBW4JCQVF23fufzs8QorDTYhvbYC"
+			]
+		},
+		"@hyperlane-xyz/core/contracts/interfaces/IInterchainSecurityModule.sol": {
+			"keccak256": "0x1996b75eef35e7769ea2c6e76d4e8ae62a8db6176b1d0b5c5d2e9fcb0c237c9a",
+			"license": "MIT OR Apache-2.0",
+			"urls": [
+				"bzz-raw://1493c0dc46ee41c6d94cbc770a324c58189dd59949bec93162d1285fc16e4ca8",
+				"dweb:/ipfs/QmVJov4Ti6etR2Vosb9Z8Hd1yK7cqsssq3kxqUzdFDW9gN"
+			]
+		},
+		"@hyperlane-xyz/core/contracts/interfaces/IMailbox.sol": {
+			"keccak256": "0x9cd728ba304279775818f8c7b4c02f8c5dd2b28e051ec466dbe36129be01a6ee",
+			"license": "MIT OR Apache-2.0",
+			"urls": [
+				"bzz-raw://23461e80c67508d6f0f94a317c48d99a1942209ebc306b50f843b3f1cc920bac",
+				"dweb:/ipfs/QmXbJSFtHfxpHwtvGZJBodSDcQHAb6fGsPU17w11dapVnC"
+			]
+		},
+		"@hyperlane-xyz/core/contracts/interfaces/hooks/IPostDispatchHook.sol": {
+			"keccak256": "0xb5df1226b2e73559f2577ef168b5f402df05b7d2bf6bd1d30baf44439aea537b",
+			"license": "MIT OR Apache-2.0",
+			"urls": [
+				"bzz-raw://b966259c91fbf77c0eb6cea7cebc4a0701cb0b1f195fd107f4a9b8a2cb04c1e0",
+				"dweb:/ipfs/QmUtJxjUWuvwFkpmFxwciaT5L5FpQMkqUed6MQMLBzPEWs"
+			]
+		},
+		"@openzeppelin/contracts/access/Ownable.sol": {
+			"keccak256": "0xff6d0bb2e285473e5311d9d3caacb525ae3538a80758c10649a4d61029b017bb",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://8ed324d3920bb545059d66ab97d43e43ee85fd3bd52e03e401f020afb0b120f6",
+				"dweb:/ipfs/QmfEckWLmZkDDcoWrkEvMWhms66xwTLff9DDhegYpvHo1a"
+			]
+		},
+		"@openzeppelin/contracts/security/ReentrancyGuard.sol": {
+			"keccak256": "0xa535a5df777d44e945dd24aa43a11e44b024140fc340ad0dfe42acf4002aade1",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://41319e7f621f2dc3733511332c4fd032f8e32ad2aa7fd6f665c19741d9941a34",
+				"dweb:/ipfs/QmcYR3bd862GD1Bc7jwrU9bGxrhUu5na1oP964bDCu2id1"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC20/IERC20.sol": {
+			"keccak256": "0xc6a8ff0ea489379b61faa647490411b80102578440ab9d84e9a957cc12164e70",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://0ea104e577e63faea3b69c415637e99e755dcbf64c5833d7140c35a714d6d90c",
+				"dweb:/ipfs/Qmau6x4Ns9XdyynRCNNp3RhLqijJjFm7z5fyZazfYFGYdq"
+			]
+		},
+		"@openzeppelin/contracts/utils/Context.sol": {
+			"keccak256": "0x493033a8d1b176a037b2cc6a04dad01a5c157722049bbecf632ca876224dd4b2",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://6a708e8a5bdb1011c2c381c9a5cfd8a9a956d7d0a9dc1bd8bcdaf52f76ef2f12",
+				"dweb:/ipfs/Qmax9WHBnVsZP46ZxEMNRQpLQnrdE4dK8LehML1Py8FowF"
+			]
+		},
+		"contracts/CrossChainFishGame.sol": {
+			"keccak256": "0x4413e429b83a0d8c6ef24ffc9d12309ffda771ee2e482578fe18620474eb8e99",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://71a5135d6e27e63b0fdc250061d396429558d844a5b50b388b9ff4035099d343",
+				"dweb:/ipfs/QmZzAxfSnVDG6hViaEDX9Eqf73EuSNGvDgx6hxGCJ9zBkB"
+			]
+		}
+	},
+	"version": 1
+}

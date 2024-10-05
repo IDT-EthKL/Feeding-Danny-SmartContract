@@ -3,15 +3,28 @@ pragma solidity ^0.8.20;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@hyperlane-xyz/core/contracts/interfaces/IMailbox.sol";
-import "@hyperlane-xyz/core/contracts/interfaces/IMessageRecipient.sol";
-import "./ERC20Reward.sol";
-import "./FishGameNFT.sol";
+import "@hyperlane-xyz/core/contracts/interfaces/IInterchainGasPaymaster.sol";
 
-contract CrossChainFishGame is Ownable, ReentrancyGuard, IMessageRecipient {
-    ERC20Reward public rewardToken;
-    FishGameNFT public fishNFT;
+interface IERC20Reward is IERC20 {
+    function mintReward(address to, uint256 amount) external;
+    function burnFrom(address account, uint256 amount) external;
+}
+
+interface IFishGameNFT {
+    function catchFish(address player, string memory species, uint256 size, uint256 rarity) external;
+    function burnFish(uint256 tokenId) external;
+    function ownerOf(uint256 tokenId) external view returns (address);
+    function getTokenId() external view returns (uint256);
+}
+
+contract CrossChainFishGame is Ownable, ReentrancyGuard {
+    IERC20Reward public rewardToken;
+    IFishGameNFT public fishNFT;
     IMailbox public hyperlaneMailbox;
+    IInterchainGasPaymaster public igp;
+    
     mapping(uint32 => bytes32) public trustedRemotes;
 
     uint256 public constant BASE_FISH_COST = 10 * 10**18; // 10 tokens
@@ -29,10 +42,16 @@ contract CrossChainFishGame is Ownable, ReentrancyGuard, IMessageRecipient {
     event PlayerGrown(address indexed player, uint256 newSize);
     event CrossChainInteraction(uint32 originChain, address player, uint256 fishId);
 
-    constructor(address _rewardToken, address _fishNFT, address _hyperlaneMailbox) Ownable(msg.sender) {
-        rewardToken = ERC20Reward(_rewardToken);
-        fishNFT = FishGameNFT(_fishNFT);
+    constructor(
+        address _rewardToken,
+        address _fishNFT,
+        address _hyperlaneMailbox,
+        address _igp
+    ) Ownable(msg.sender) {
+        rewardToken = IERC20Reward(_rewardToken);
+        fishNFT = IFishGameNFT(_fishNFT);
         hyperlaneMailbox = IMailbox(_hyperlaneMailbox);
+        igp = IInterchainGasPaymaster(_igp);
     }
 
     function setTrustedRemote(uint32 _domain, bytes32 _trustedRemote) external onlyOwner {
@@ -74,7 +93,7 @@ contract CrossChainFishGame is Ownable, ReentrancyGuard, IMessageRecipient {
         playerState.lastInteractionTime = block.timestamp;
     }
 
-    function crossChainEat(uint32 destinationChain, uint256 fishId) external nonReentrant {
+    function crossChainEat(uint32 destinationChain, uint256 fishId) external payable nonReentrant {
         require(fishNFT.ownerOf(fishId) == msg.sender, "Not the owner of this fish");
         
         // Burn the NFT on this chain
@@ -83,13 +102,38 @@ contract CrossChainFishGame is Ownable, ReentrancyGuard, IMessageRecipient {
         // Prepare the message for the destination chain
         bytes memory message = abi.encode(msg.sender, fishId);
 
-        // Send the cross-chain message using Hyperlane
-        hyperlaneMailbox.dispatch(destinationChain, trustedRemotes[destinationChain], message);
+        // Dispatch the message
+        bytes32 messageId = hyperlaneMailbox.dispatch(
+            destinationChain,
+            trustedRemotes[destinationChain],
+            message
+        );
+
+        // Quote and pay for interchain gas
+        uint256 gasAmount = 300000; // Estimate of gas needed on destination chain
+        uint256 quote = igp.quoteGasPayment(destinationChain, gasAmount);
+        require(msg.value >= quote, "Insufficient interchain gas payment");
+        
+        igp.payForGas{value: quote}(
+            messageId,
+            destinationChain,
+            gasAmount,
+            msg.sender
+        );
+
+        if (msg.value > quote) {
+            // Refund excess payment
+            payable(msg.sender).transfer(msg.value - quote);
+        }
 
         emit CrossChainInteraction(destinationChain, msg.sender, fishId);
     }
 
-    function handle(uint32 _origin, bytes32 _sender, bytes calldata _body) external payable override {
+    function handle(
+        uint32 _origin,
+        bytes32 _sender,
+        bytes calldata _body
+    ) external payable {
         require(msg.sender == address(hyperlaneMailbox), "Only mailbox can call");
         require(_sender == trustedRemotes[_origin], "Not a trusted remote");
 
