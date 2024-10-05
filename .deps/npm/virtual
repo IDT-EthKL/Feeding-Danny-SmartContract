@@ -1,0 +1,8 @@
+/**
+ * Minified by jsDelivr using Terser v5.19.2.
+ * Original file: /npm/virtual@0.2.0/dist/index.js
+ *
+ * Do NOT use SRI with dynamically generated files! More information: https://www.jsdelivr.com/using-sri-with-dynamic-files
+ */
+"use strict";var _slice=Array.prototype.slice,_inherits=function(t,e){t.prototype=Object.create(e&&e.prototype,{constructor:{value:t,enumerable:!1,writable:!0,configurable:!0}}),e&&(t.__proto__=e)};require("6to5/polyfill");var _=require("lodash"),should=require("should"),Promise=(global||window).Promise=require("bluebird"),__DEV__="production"!==process.env.NODE_ENV,__PROD__=!__DEV__,__BROWSER__="object"==typeof window,__NODE__=!__BROWSER__;__DEV__&&Promise.longStackTraces();var VirtualMethodCall=function(){var t=TypeError,e=function(t){this.message="Attempting to call virtual method "+t+"."};return _inherits(e,t),e}(),VirtualMethodNotImplemented=function(){var t=TypeError,e=function(t){this.message="Virtual method "+t+" not implemented."};return _inherits(e,t),e}(),__virtualMethod=function(t){return function(){if(__DEV__)throw new VirtualMethodCall(t)}};module.exports=function(){var t=_slice.call(arguments),e={};t.forEach((function(t){return e[t]=__virtualMethod(t)}));var r=function(){var r=this;__DEV__&&t.forEach((function(t){if(r[t]===e[t])throw new VirtualMethodNotImplemented(t)}))};return Object.assign(r.prototype,e),r};
+//# sourceMappingURL=/sm/229e18aaa3ded5fb167da8f191bcdb094f71a7ae000c69139a4cbc561ebf8360.map
