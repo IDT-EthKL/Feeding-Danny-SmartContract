@@ -1,28 +1,66 @@
-REMIX DEFAULT WORKSPACE
+###Cross-Chain Game Fish (CCGF) with IGP
 
-Remix default workspace is present when:
-i. Remix loads for the very first time 
-ii. A new workspace is created with 'Default' template
-iii. There are no files existing in the File Explorer
+This README provides an overview of the Cross-Chain Game Fish (CCGF) project, which utilizes Interchain Governance Protocol (IGP) for cross-chain functionality.
+Contract Addresses
+ERC20 Tokens
 
-This workspace contains 3 directories:
+Scroll (Sepolia)
 
-1. 'contracts': Holds three contracts with increasing levels of complexity.
-2. 'scripts': Contains four typescript files to deploy a contract. It is explained below.
-3. 'tests': Contains one Solidity test file for 'Ballot' contract & one JS test file for 'Storage' contract.
+Address: 0x893677ba1b1f794bbc836ac3fb8f5950a0c47436
 
-SCRIPTS
 
-The 'scripts' folder has four typescript files which help to deploy the 'Storage' contract using 'web3.js' and 'ethers.js' libraries.
+Manta (Sepolia)
 
-For the deployment of any other contract, just update the contract's name from 'Storage' to the desired contract and provide constructor arguments accordingly 
-in the file `deploy_with_ethers.ts` or  `deploy_with_web3.ts`
+Address: 0x15455Ee837cf3E8115862900AA9434E92d95c662
 
-In the 'tests' folder there is a script containing Mocha-Chai unit tests for 'Storage' contract.
 
-To run a script, right click on file name in the file explorer and click 'Run'. Remember, Solidity file must already be compiled.
-Output from script will appear in remix terminal.
 
-Please note, require/import is supported in a limited manner for Remix supported modules.
-For now, modules supported by Remix are ethers, web3, swarmgw, chai, multihashes, remix and hardhat only for hardhat.ethers object/plugin.
-For unsupported modules, an error like this will be thrown: '<module_name> module require is not supported by Remix IDE' will be shown.
+ERC721 Tokens
+
+Manta (Sepolia)
+
+Address: 0x42EDfF2AB874c94F843C8112629313066eb82847
+
+
+Scroll (Sepolia)
+
+Address: 0x1022f54be54e5bd3161f090356cb1356e5c69c92
+
+
+
+Hyperlane Mailbox Registry
+
+Manta Pacific (Sepolia)
+
+Address: 0xAF85A0023fAc623fCE4F20f50BD475C01e6791B1
+Contract: 0xaf85a0023fac623fce4f20f50bd475c01e6791b1
+
+![WhatsApp Image 2024-10-06 at 00 43 27_736def4b](https://github.com/user-attachments/assets/22eeda54-de0e-4f79-87fb-4116f021e1d2)
+
+CCGF with IGP
+
+Scroll (Sepolia)
+
+Address: 0x6696283e07ce0619f6d88626a77a41978517dd1f
+
+
+Manta (Sepolia)
+
+Address: 0x5600a56980492570B74C71B16A242544208e4E53
+
+Cross chain game fish ( CCGF) with IGP
+scroll
+https://sepolia.scrollscan.com/address/0x6696283e07ce0619f6d88626a77a41978517dd1f
+
+manta
+https://manta-sepolia.explorer.caldera.xyz/address/0x5600a56980492570B74C71B16A242544208e4E53 
+
+Project Overview
+The Cross-Chain Game Fish (CCGF) project is a blockchain-based game that operates across multiple chains, specifically Scroll and Manta networks on the Sepolia testnet. It utilizes ERC20 and ERC721 tokens for in-game assets and implements cross-chain functionality using the Interchain Governance Protocol (IGP).
+Features
+
+Cross-chain functionality between Scroll and Manta networks
+ERC20 token support for in-game currency
+ERC721 token support for unique in-game assets (NFTs)
+Utilizes Hyperlane's Mailbox Registry for cross-chain messaging
+Implements IGP for enhanced interoperability
