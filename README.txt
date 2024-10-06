@@ -35,7 +35,7 @@ Manta Pacific (Sepolia)
 Address: 0xAF85A0023fAc623fCE4F20f50BD475C01e6791B1
 Contract: 0xaf85a0023fac623fce4f20f50bd475c01e6791b1
 
-![WhatsApp Image 2024-10-06 at 00 43 27_736def4b](https://github.com/user-attachments/assets/22eeda54-de0e-4f79-87fb-4116f021e1d2)
+(https://github.com/user-attachments/assets/22eeda54-de0e-4f79-87fb-4116f021e1d2)
 
 CCGF with IGP
 
